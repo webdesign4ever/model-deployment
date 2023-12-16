@@ -1,0 +1,36 @@
+#uploadedImage {
+  display: none;
+  max-width: 600px;
+  max-height: 600px;
+} 
+ #heatmap {
+  max-width: 600px;
+  max-height: 600px;
+}
+h1{
+    text-align: center;
+}
+
+div.form
+{
+    display: block;
+    text-align: center;
+}
+
+#uploadForm{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#submit{
+    display: block;
+    text-align: center;
+    margin-top: 9px;
+} 
+ .predict{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

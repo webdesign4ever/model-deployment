@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Forgery Detection</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static' , filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Image Forgery Detection</h1>
+    <div class="form">
+      <form id="uploadForm" method="post" enctype="multipart/form-data">
+        <input
+          type="file"
+          name="file"
+          id="fileInput"
+          accept=".jpg, .jpeg, .png"
+        />
+        <input type="submit" id="submit" value="Predict" />
+      </form>
+    </div>
+    <div class="predict">
+      <div id="result"></div>
+      <div id="confidence"></div>
+      <img id="uploadedImage"  style="display: none; max-width: 600px; max-height: 600px" />
+      &nbsp;
+      <div id="heatmapResult"></div>
+    </div>
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          var formData = new FormData(this);
+          fetch("/predict", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              var resultDiv = document.getElementById("result");
+              var confDiv = document.getElementById("confidence");
+              resultDiv.innerHTML = `Prediction: ${data.prediction} `;
+              confDiv.innerHTML = `Confidence: ${data.confidence.toFixed(2)}%`;
+              document.getElementById("uploadedImage").src =
+                URL.createObjectURL(
+                  document.getElementById("fileInput").files[0]
+                );
+              document.getElementById("uploadedImage").style.display = "block";
+              // After receiving the prediction result, initiate request for heatmap
+              fetch("/generate_heatmap", {
+                method: "POST",
+                body: formData,
+              })
+                .then((response) => response.json())
+                .then((heatmapData) => {
+                  var heatmapResultDiv =
+                    document.getElementById("heatmapResult");
+                  const timestamp = new Date().getTime();
+                  heatmapResultDiv.innerHTML = `<img src="${heatmapData.heatmap_path}?t=${timestamp}" id="heatmap"  alt="Heatmap" />`;
+                })
+                .catch((error) =>
+                  console.error("Error fetching heatmap:", error)
+                );
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+    </script>
+  </body>
+</html>
