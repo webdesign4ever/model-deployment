@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 
 # Ignore the model file
-model/model_ELAImgForgery.h5
+model/
