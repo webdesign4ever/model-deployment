@@ -38,7 +38,6 @@ matplotlib-inline==0.1.6
 ml-dtypes==0.2.0
 numpy==1.26.2
 oauthlib==3.2.2
-opencv-python==4.8.1.78
 opencv-python-headless==4.8.1.78
 opt-einsum==3.3.0
 packaging==23.2
