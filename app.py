@@ -14,7 +14,7 @@ import matplotlib
 app = Flask(__name__)
 
 # Load the saved model
-MODEL_PATH = 'model/model_ELAImgForgery.h5'
+MODEL_PATH = 'model'
 loaded_model = load_model(MODEL_PATH)
 
 def convert_to_ela_image(path, quality):
