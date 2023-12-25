@@ -8,7 +8,6 @@ import tensorflow as tf
 import keras
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
-from IPython.display import display
 import matplotlib
 
 app = Flask(__name__)
@@ -85,7 +84,6 @@ def save_and_display_gradcam(img_path,heatmap,cam_path="cam.jpg",alpha=0.4):
     superimposed_img=keras.preprocessing.image.array_to_img(superimposed_img)
 
     superimposed_img.save(cam_path)
-    display(Image.open(cam_path))
 
 @app.route('/')
 def index():
