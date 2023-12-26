@@ -6,6 +6,7 @@ from PIL import Image, ImageChops, ImageEnhance
 import cv2
 import tensorflow as tf
 import keras
+import pickle
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 import matplotlib
@@ -13,8 +14,7 @@ import matplotlib
 app = Flask(__name__)
 
 # Load the saved model
-MODEL_PATH = 'model'
-loaded_model = load_model(MODEL_PATH)
+loaded_model = pickle.load(open("model.pkl", "rb"))
 
 def convert_to_ela_image(path, quality):
     temp_filename = 'temp_file_name.jpg'
