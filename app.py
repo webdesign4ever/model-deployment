@@ -14,7 +14,11 @@ import matplotlib
 app = Flask(__name__)
 
 # Load the saved model
-loaded_model = pickle.load(open("model.pkl", "rb"))
+# loaded_model = pickle.load(open("model.pkl", "rb"))
+model_filename = 'model.pkl'
+with open(model_filename, 'rb') as file:
+    loaded_model = pickle.load(file)
+
 
 def convert_to_ela_image(path, quality):
     temp_filename = 'temp_file_name.jpg'
